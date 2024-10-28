@@ -1,0 +1,30 @@
+services:
+  postgres:
+    container_name: postgres-sql-rentcar
+    image: postgres
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: rentcardb
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - 5432:5432  #default port of postgres
+    networks:
+      - spring-demo
+    restart: unless-stopped
+  mail-dev:  #for the email service
+            container_name: mail-dev-rentcar
+            image: maildev/maildev
+            ports:
+              - 1080:1080  #it is mentionned in the documentation of github
+              - 1025:1025
+
+networks:
+    spring-demo:
+      driver: bridge
+
+volumes:
+    postgres:
+      driver: local

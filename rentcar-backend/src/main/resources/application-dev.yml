@@ -1,0 +1,49 @@
+#dev configuration
+spring:
+  datasource: #connexion m3a db
+    url: jdbc:postgresql://localhost:5433/rentcardb
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false #when hibernate executes a query it will be displayed in console and shown in logs
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect #SGBD
+  mail:
+    host: localhost
+    port: 1025
+    username: username
+    password: password
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+        auth: true
+        starttls: #TLS: transport layer security
+          enabled: true
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
+application:
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000 # un jour
+
+  mailing:
+    frontend:
+      activation-url: http://localhost:4200/activate-account
+  file:
+    uploads:
+      photos-output-path: ./uploads #folder called uploads in root prj
+  paypal:
+    client-id: ARdOGf6vqrk3_Y2GJypCCs6LjtO_4jiNthb12RktUqe9kobRFE6dYGwu8m-_6Us9JWMn-401BGfSfuf2
+    client-secret: EA9Zds0Pu0OFGc5J82tkewscw1J9WTn-2wCNsjvnIJEId6YVl1jW2VL9FJ4Ux-KHhty1yURGM-zRQSwj
+    mode: sandbox #used sandbox for testing / live => production
+server:
+  port: 8088
